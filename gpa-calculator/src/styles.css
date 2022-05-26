@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body{
+    text-align: center;
+    background-color: #F5F5DC;
+}
+
+table{
+    text-align: start;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+form{
+    margin-top: 50px;
+    display: inline-block;
+    text-align: start;
+}
+
+button{
+    margin-right: 3px;
+}
+
+.welcome-text{
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    margin-top: 10px;
+}

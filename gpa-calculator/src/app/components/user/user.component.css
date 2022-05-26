@@ -1,0 +1,18 @@
+.welcome-text{
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+}
+
+form{
+    margin-top: 50px;
+    display: inline-block;
+    text-align: start;
+}
+
+input{
+    width: 500px;
+}
+
+button{
+    margin-right: 3px;
+}
