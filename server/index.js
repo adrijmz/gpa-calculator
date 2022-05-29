@@ -10,13 +10,8 @@ app.use(bodyParser.json({extended:false}))
 connectDB()
 
 app.use('/api/grades', require('./routes/grade'))
-
-
-
-
-
-
-
+app.use('/api/login', require('./routes/login'))
+app.use('/api/signup', require('./routes/signup'))
 
 
 app.listen(process.env.PORT || 3000, () => {
