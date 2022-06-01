@@ -37,6 +37,7 @@ exports.getUser = async (req,res) => {
         else {
             if(userToFind.password === password) res.json('User found!')        
             else res.json('password incorrect') 
+            console.log(userToFind)
         }
             
     } catch (error) {

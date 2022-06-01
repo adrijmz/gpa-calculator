@@ -1,22 +1,31 @@
 const bodyParser = require('body-parser')
 const Grade = require('../models/Grade')
+const User = require('../models/User')
 
 
 exports.createGrade =  async (req, res) => {
+    
     try {
-        let grade = new Grade(req.body)
+        User.findOne({email:req.params.email}, (err, user) => {
+            if(user){
+                let grade = new Grade(req.body)
+                user.grades.push(grade)
+                console.log(user)
+                res.send(user.grades)
+                user.save()
+            }
+            else{
+                res.json("This user doesn't exists")
+                console.log(error)
+            }
+        })        
 
-        grade.save()
-        res.send(grade)
-        
     } catch (error) {
-        console.log(error)
         res.status(500).send('There was an internal server error')
     }
 }
 
-exports.getGrade = async (req, res) => {
-    //return all grade in db
+exports.getGrade = async (req, res) => {    //return all grade in db
     try {        
         const GRADES = await Grade.find()
         res.json(GRADES)
@@ -26,22 +35,18 @@ exports.getGrade = async (req, res) => {
     }
 }
 
-exports.updateGrade = async (req,res) => {
+exports.deleteGrade = async (req,res) => {
     try {
-        const {course, ects, grade} = req.body
-        let updatedGrade = await Grade.findById(req.params.id)
-    
-        if(!updatedGrade){
-            res.status(404)
-            res.json('No coincidence with that id')
-        }
-    
-        updatedGrade.course = course
-        updatedGrade.ects = ects
-        updatedGrade.grade = grade
-    
-        updatedGrade = await Grade.findOneAndUpdate({_id:req.params.id}, updatedGrade, {new:true})
-        res.json(updatedGrade)
+        User.findOne({email: req.params.email}, (err, user) => {
+            if(user){
+                user.grades.pop()
+                res.json('course deleted')
+                user.save()
+            }
+            else{
+                res.status(404).send('User not founded')
+            }
+        })
     } catch (error) {
         console.log(error)
         res.status(500).send('There was an error')

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Grade = require('./Grade')
 
 const userChema = mongoose.Schema({
     email:{
@@ -21,6 +22,7 @@ const userChema = mongoose.Schema({
         type:String,
         required: true
     },
+    grades: []
 })
 
 module.exports = mongoose.model('User', userChema)
